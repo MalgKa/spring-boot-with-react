@@ -1,0 +1,2 @@
+### Get contacts
+GET localhost:8080/contacts?page=0&size=3
