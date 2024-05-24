@@ -12,11 +12,12 @@ function App() {
         setData(data)
     }
     return (
-        <div>
-            <h1>so hello :)</h1>
-            <button onClick={() => getAllContacts()}>get all contacts</button>
-            <ContactList data={data}/>
-        </div>
+        <main className='main'>
+            <div className='container'>
+                <button onClick={() => getAllContacts()}>get all contacts</button>
+                <ContactList data={data}/>
+            </div>
+        </main>
     );
 }
 

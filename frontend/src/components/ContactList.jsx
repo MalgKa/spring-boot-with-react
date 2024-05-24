@@ -1,7 +1,6 @@
 import React from "react";
 
 const ContactList = ({data}) => {
-    console.log(data)
     return (
         <ul>
             {data.content && data.content.map((contact, index) => (
@@ -10,5 +9,4 @@ const ContactList = ({data}) => {
         </ul>
     )
 }
-
 export default ContactList
