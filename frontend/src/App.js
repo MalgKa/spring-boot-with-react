@@ -1,6 +1,7 @@
 import './App.css';
 import {getContacts} from "./api/ContactService";
 import {useState} from "react";
+import ContactList from "./components/ContactList";
 
 function App() {
     const [data, setData] = useState([])
@@ -14,11 +15,7 @@ function App() {
         <div>
             <h1>so hello :)</h1>
             <button onClick={() => getAllContacts()}>get all contacts</button>
-            <ul>
-                {data.content && data.content.map((contact, index) => (
-                    <li key={index}>{contact.name}, {contact.phone}, {contact.position}, {contact.email}, {contact.photo_url}</li>
-                ))}
-            </ul>
+            <ContactList data={data}/>
         </div>
     );
 }
