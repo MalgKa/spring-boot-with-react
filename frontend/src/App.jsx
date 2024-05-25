@@ -1,6 +1,6 @@
 import './App.css';
 import {getContacts} from "./api/ContactService";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ContactList from "./components/ContactList";
 
 function App() {
@@ -11,14 +11,17 @@ function App() {
         console.log(data)
         setData(data)
     }
+
+    useEffect(() => {
+        getAllContacts()
+    }, []);
+
     return (
         <main className='main'>
             <div className='container'>
-                <button onClick={() => getAllContacts()}>get all contacts</button>
                 <ContactList data={data}/>
             </div>
         </main>
     );
 }
-
 export default App;
