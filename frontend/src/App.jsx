@@ -7,11 +7,13 @@ function App() {
     const [data, setData] = useState([])
 
     const getAllContacts = async (page = 0, size = 10) => {
-        const {data} = await getContacts(page, size);
-        console.log(data)
-        setData(data)
+        try {
+            const {data} = await getContacts(page, size);
+            setData(data)
+        } catch (error) {
+            console.error("Failed to fetch contacts", error)
+        }
     }
-
     useEffect(() => {
         getAllContacts()
     }, []);
