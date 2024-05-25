@@ -38,7 +38,7 @@ code {
 
 .contact__list{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 4rem;
   border: 1px solid black;
 }
@@ -60,4 +60,10 @@ code {
   align-items: center;
   column-gap: 12px;
   border: 2px solid brown;
+}
+.contact__body{
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  margin-top: 1rem;
 }
