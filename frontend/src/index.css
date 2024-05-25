@@ -35,3 +35,15 @@ code {
   margin-left: 0;
   margin-right: 0;
 }
+
+.contact__list{
+  display: grid;
+  gap: 1rem;
+}
+.contact__header{
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 12px;
+}

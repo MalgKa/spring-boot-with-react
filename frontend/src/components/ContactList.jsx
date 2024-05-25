@@ -1,10 +1,10 @@
 import React from "react";
+import Contact from "./Contact";
 
 const ContactList = ({data}) => {
     return (
-        <ul>
-            {data.content && data.content.map((contact, index) => (
-                <li key={index}>{contact.name}, {contact.phone}, {contact.position}, {contact.email}, {contact.photo_url}</li>
+        <ul className='contact__list'>
+            {data.content && data.content.map(contact => (<Contact contact={contact} key={contact.id}/>
             ))}
         </ul>
     )
