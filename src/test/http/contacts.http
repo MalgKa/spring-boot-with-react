@@ -1,2 +1,15 @@
 ### Get contacts
 GET localhost:8080/contacts?page=0&size=3
+
+###Create contact
+POST localhost:8080/contacts
+Content-Type: application/json
+
+{
+  "name": "Alice Smith",
+  "email": "asmith@gmail.com",
+  "phone": "666888777145",
+  "position": "supervisor",
+  "status": "active",
+  "address": "New Zealand"
+}

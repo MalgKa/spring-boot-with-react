@@ -20,4 +20,8 @@ public class ContactService {
         Pageable pageable = PageRequest.of(page, size);
         return contactRepository.findAll(pageable);
     }
+
+    public Contact createContact(Contact contact){
+        return contactRepository.save(contact);
+    }
 }
