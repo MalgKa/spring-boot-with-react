@@ -2,6 +2,7 @@ import './App.css';
 import {getContacts} from "./api/ContactService";
 import {useEffect, useState} from "react";
 import ContactList from "./components/ContactList";
+import Header from "./components/Header";
 
 function App() {
     const [data, setData] = useState([])
@@ -21,6 +22,7 @@ function App() {
     return (
         <main className='main'>
             <div className='container'>
+                <Header numberOfContacts={data.totalElements}/>
                 <ContactList data={data}/>
             </div>
         </main>
