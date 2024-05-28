@@ -1,5 +1,5 @@
 import './App.css';
-import {getContacts} from "./api/ContactService";
+import {getContacts, saveContact} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
@@ -37,9 +37,14 @@ function App() {
         })
     }
 
-    const handleNewContact = (e)=>{
+    const handleNewContact = async (e)=>{
         e.preventDefault()
-        console.log(values)
+        try{
+            const resp = await saveContact(values)
+            console.log(resp)
+        }catch(error){
+            console.log(error)
+        }
     }
 
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
