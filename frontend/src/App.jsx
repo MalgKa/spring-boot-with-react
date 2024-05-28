@@ -6,6 +6,16 @@ import Header from "./components/Header";
 
 function App() {
     const [data, setData] = useState([])
+    const [values, setValues] = useState(
+        {
+            name:'',
+            email:'',
+            phone:'',
+            position:'',
+            status:'',
+            address:''
+        }
+    )
     const modalRef = useRef();
 
     const getAllContacts = async (page = 0, size = 10) => {
@@ -20,10 +30,19 @@ function App() {
         getAllContacts()
     }, []);
 
-    const handleNewContact = ()=>{}
+    const onChange = (e)=>{
+        setValues({
+            ...values,
+            [e.target.name]:e.target.value
+        })
+    }
+
+    const handleNewContact = (e)=>{
+        e.preventDefault()
+        console.log(values)
+    }
 
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
-
 
     return (
         <>
@@ -38,27 +57,27 @@ function App() {
                 <form onSubmit={handleNewContact}>
                     <div>
                         <span>name</span>
-                        <input type="text" name='name' required/>
+                        <input type="text" name='name' onChange={onChange} required/>
                     </div>
                     <div>
                         <span>email</span>
-                        <input type="text" name='email' required/>
+                        <input type="text" name='email' onChange={onChange} required/>
                     </div>
                     <div>
                         <span>phone</span>
-                        <input type="text" name='phone' required/>
+                        <input type="text" name='phone' onChange={onChange} required/>
                     </div>
                     <div>
                         <span>position</span>
-                        <input type="text" name='position' required/>
+                        <input type="text" name='position' onChange={onChange} required/>
                     </div>
                     <div>
                         <span>status</span>
-                        <input type="text" name='status' required/>
+                        <input type="text" name='status' onChange={onChange} required/>
                     </div>
                     <div>
                         <span>address</span>
-                        <input type="text" name='address' required/>
+                        <input type="text" name='address' onChange={onChange} required/>
                     </div>
                     <button type='submit'>save</button>
                 </form>
