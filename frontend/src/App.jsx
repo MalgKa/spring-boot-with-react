@@ -41,11 +41,19 @@ function App() {
         e.preventDefault()
         try{
             const {data} = await saveContact(values)
+            toggleModal(false)
+            setValues({
+                name:'',
+                email:'',
+                phone:'',
+                position:'',
+                status:'',
+                address:''
+            })
         }catch(error){
             console.log(error)
         }
     }
-
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
 
     return (
@@ -61,27 +69,27 @@ function App() {
                 <form onSubmit={handleNewContact}>
                     <div>
                         <span>name</span>
-                        <input type="text" name='name' onChange={onChange} required/>
+                        <input type="text" name='name' value={values.name} onChange={onChange} required/>
                     </div>
                     <div>
                         <span>email</span>
-                        <input type="text" name='email' onChange={onChange} required/>
+                        <input type="text" name='email' value={values.email} onChange={onChange} required/>
                     </div>
                     <div>
                         <span>phone</span>
-                        <input type="text" name='phone' onChange={onChange} required/>
+                        <input type="text" name='phone' value={values.phone} onChange={onChange} required/>
                     </div>
                     <div>
                         <span>position</span>
-                        <input type="text" name='position' onChange={onChange} required/>
+                        <input type="text" name='position' value={values.position} onChange={onChange} required/>
                     </div>
                     <div>
                         <span>status</span>
-                        <input type="text" name='status' onChange={onChange} required/>
+                        <input type="text" name='status' value={values.status} onChange={onChange} required/>
                     </div>
                     <div>
                         <span>address</span>
-                        <input type="text" name='address' onChange={onChange} required/>
+                        <input type="text" name='address' value={values.address} onChange={onChange} required/>
                     </div>
                     <button type='submit'>save</button>
                 </form>
