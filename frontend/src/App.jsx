@@ -40,8 +40,7 @@ function App() {
     const handleNewContact = async (e)=>{
         e.preventDefault()
         try{
-            const resp = await saveContact(values)
-            console.log(resp)
+            const {data} = await saveContact(values)
         }catch(error){
             console.log(error)
         }
