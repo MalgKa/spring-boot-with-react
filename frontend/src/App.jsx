@@ -68,33 +68,34 @@ function App() {
             </main>
             <dialog ref={modalRef} className='modal'>
                 <div className='modal__header'>
-                    <h1>new contact</h1>
-                    <hr/>
+                    <h1>New Contact</h1>
+                    <i onClick={()=>toggleModal(false)} className="bi bi-x-circle-fill"></i>
                 </div>
+                <hr/>
                 <form onSubmit={handleNewContact}>
                     <div className='contact_details'>
                         <div className='input-box'>
-                            <span className='details'>name</span>
+                            <span className='details'><i className="bi bi-person"></i> Name</span>
                             <input type="text" name='name' value={values.name} onChange={onChange} required/>
                         </div>
                         <div className='input-box'>
-                            <span className='details'>email</span>
+                            <span className='details'><i className="bi bi-envelope-at"></i> Email</span>
                             <input type="text" name='email' value={values.email} onChange={onChange} required/>
                         </div>
                         <div className='input-box'>
-                            <span className='details'>phone</span>
+                            <span className='details'><i className="bi bi-telephone"></i> Phone</span>
                             <input type="text" name='phone' value={values.phone} onChange={onChange} required/>
                         </div>
                         <div className='input-box'>
-                            <span className='details'>position</span>
+                            <span className='details'><i className="bi bi-briefcase"></i> Position</span>
                             <input type="text" name='position' value={values.position} onChange={onChange} required/>
                         </div>
                         <div className='input-box'>
-                            <span className='details'>status</span>
+                            <span className='details'><i className="bi bi-check"></i> status</span>
                             <input type="text" name='status' value={values.status} onChange={onChange} required/>
                         </div>
                         <div className='input-box'>
-                            <span className='details'>address</span>
+                            <span className='details'><i className="bi bi-geo-alt"></i> address</span>
                             <input type="text" name='address' value={values.address} onChange={onChange} required/>
                         </div>
                     </div>

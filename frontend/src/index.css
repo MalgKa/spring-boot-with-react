@@ -1,3 +1,8 @@
+
+:root{
+    --ff-comic: 'Comic Neue';
+}
+
 /* RESET */
 *,
 *::before,
@@ -10,9 +15,11 @@
 
 body {
 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',*/
+    /*'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',*/
+    /*sans-serif;*/
+    font-family: var(--ff-comic);
+    font-weight: 700;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -88,7 +95,18 @@ code {
 }
 
 .modal__header{
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 1rem;
+}
+
+.modal__header i{
+    font-size: 30px;
+    color: darkred;
+    cursor: pointer;
+    &:hover{
+        color: #631010
+    }
 }
 
 .contact_details {
