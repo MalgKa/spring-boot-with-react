@@ -23,4 +23,8 @@ public class ContactController {
         Contact createdContact = contactService.createContact(contact);
         return ResponseEntity.ok(createdContact);
     }
+    @GetMapping("/contacts/{id}")
+    public ResponseEntity<Contact> getContact(@PathVariable String id){
+        return ResponseEntity.ok(contactService.getContact(id));
+    }
 }

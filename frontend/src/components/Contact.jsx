@@ -1,6 +1,12 @@
 import React from "react";
+import {getContact} from "../api/ContactService";
 
 const Contact = ({contact}) => {
+//test
+    const handleOnClick = async () => {
+        const {data} = await getContact(contact.id)
+        console.log(data)
+    }
     return (
         <a className='contact__item'>
             <header className='contact__header'>
@@ -18,6 +24,7 @@ const Contact = ({contact}) => {
                 <p>{contact.address}</p>
                 <p>{contact.status}</p>
             </div>
+            <button onClick={handleOnClick}>click</button>
         </a>
     )
 }

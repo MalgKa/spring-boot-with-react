@@ -10,18 +10,21 @@ import pl.projects.springbootwithreact.model.Contact;
 @Service
 public class ContactService {
 
-  private final ContactRepository contactRepository;
+    private final ContactRepository contactRepository;
 
     public ContactService(ContactRepository contactRepository) {
         this.contactRepository = contactRepository;
     }
 
-    public Page<Contact> getAllContacts(int page, int size){
+    public Page<Contact> getAllContacts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return contactRepository.findAll(pageable);
     }
+    public Contact getContact(String id) {
+        return contactRepository.findById(id).orElse(null);
+    }
 
-    public Contact createContact(Contact contact){
+    public Contact createContact(Contact contact) {
         return contactRepository.save(contact);
     }
 }

@@ -9,3 +9,6 @@ export async function getContacts(page,size){
 export async function saveContact(contact){
     return await axios.post(API_URL,contact)
 }
+export async function getContact(id){
+    return await axios.get(`${API_URL}/${id}`)
+}
