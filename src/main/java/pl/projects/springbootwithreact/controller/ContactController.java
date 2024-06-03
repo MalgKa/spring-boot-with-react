@@ -3,6 +3,7 @@ package pl.projects.springbootwithreact.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.projects.springbootwithreact.model.Contact;
 import pl.projects.springbootwithreact.service.ContactService;
 
@@ -27,4 +28,10 @@ public class ContactController {
     public ResponseEntity<Contact> getContact(@PathVariable String id){
         return ResponseEntity.ok(contactService.getContact(id));
     }
+
+    @PutMapping("/contacts/photo")
+    public ResponseEntity<String> uploadPhoto(@RequestParam String id, @RequestParam MultipartFile photo) {
+        return ResponseEntity.ok(contactService.uploadPhoto(id, photo));
+    }
+
 }

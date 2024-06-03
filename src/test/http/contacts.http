@@ -1,7 +1,7 @@
 ### Get contacts
 GET localhost:8080/contacts?page=0&size=3
 
-###Create contact
+### Create contact
 POST localhost:8080/contacts
 Content-Type: application/json
 
@@ -13,3 +13,21 @@ Content-Type: application/json
   "status": "active",
   "address": "New Zealand"
 }
+
+### GET contact
+GET localhost:8080/contacts/ewtihgfew87t8745
+
+### Upload photo
+PUT localhost:8080/contacts/photo
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="id"
+
+w45serfsdtre5teg
+--boundary
+Content-Disposition: form-data; name="photo"; filename="happy-1836445_640.jpg"
+Content-Type: image/jpeg
+
+< /home/user/Downloads/Photos/happy-1836445_640.jpg
+--boundary--
