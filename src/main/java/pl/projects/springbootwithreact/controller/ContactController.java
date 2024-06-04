@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.projects.springbootwithreact.model.Contact;
 import pl.projects.springbootwithreact.service.ContactService;
 
+@RequestMapping("/contacts")
 @RestController
 public class ContactController {
     private final ContactService contactService;
@@ -14,22 +15,22 @@ public class ContactController {
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
     }
-    @GetMapping("/contacts")
+    @GetMapping
     public ResponseEntity<Page<Contact>> getContacts(@RequestParam int page, int size){
         Page<Contact> allContacts = contactService.getAllContacts(page, size);
         return ResponseEntity.ok(allContacts);
     }
-    @PostMapping("/contacts")
+    @PostMapping
     public ResponseEntity<Contact> createContact(@RequestBody Contact contact){
         Contact createdContact = contactService.createContact(contact);
         return ResponseEntity.ok(createdContact);
     }
-    @GetMapping("/contacts/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Contact> getContact(@PathVariable String id){
         return ResponseEntity.ok(contactService.getContact(id));
     }
 
-    @PutMapping("/contacts/photo")
+    @PutMapping("/photo")
     public ResponseEntity<String> uploadPhoto(@RequestParam String id, @RequestParam MultipartFile photo) {
         return ResponseEntity.ok(contactService.uploadPhoto(id, photo));
     }

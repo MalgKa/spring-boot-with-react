@@ -43,7 +43,11 @@ public class ContactService {
     }
 
     public String uploadPhoto(String id, MultipartFile photo) {
-        return savePhoto.apply(id, photo);
+        Contact contact = getContact(id);
+        String photoUrl = savePhoto.apply(id,photo);
+        contact.setPhotoUrl(photoUrl);
+        contactRepository.save(contact);
+        return photoUrl;
     }
 
 
