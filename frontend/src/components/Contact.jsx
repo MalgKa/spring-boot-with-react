@@ -11,7 +11,7 @@ const Contact = ({contact}) => {
         <a className='contact__item'>
             <header className='contact__header'>
                 <div>
-                    <img src="#" alt="picture"/>
+                    <img src={contact.photoUrl} alt={contact.name}/>
                 </div>
                 <div>
                     <div>{contact.name}</div>

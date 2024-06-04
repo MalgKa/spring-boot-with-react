@@ -64,7 +64,7 @@ public class ContactService {
                 Files.createDirectories(pathFile);
             }
             Files.copy(photo.getInputStream(), pathFile.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
-            return ServletUriComponentsBuilder.fromCurrentContextPath().path("/contacts/image/" + filename).toUriString();
+            return ServletUriComponentsBuilder.fromCurrentContextPath().path("/contacts/photo/" + filename).toUriString();
         } catch (Exception e) {
             throw new RuntimeException("The file cannot be saved");
         }
