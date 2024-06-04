@@ -1,11 +1,12 @@
 import './App.css';
-import {getContacts, saveContact} from "./api/ContactService";
+import {getContacts, saveContact, uploadPhoto} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
 
 function App() {
     const [data, setData] = useState([])
+    const [file, setFile] = useState(undefined)
     const [values, setValues] = useState(
         {
             name: '',
@@ -17,7 +18,6 @@ function App() {
         }
     )
     const modalRef = useRef();
-
     const getAllContacts = async (page = 0, size = 10) => {
         try {
             const {data} = await getContacts(page, size);
@@ -41,6 +41,10 @@ function App() {
         e.preventDefault()
         try {
             const {data} = await saveContact(values)
+            const formData = new FormData()
+            formData.append('photo', file, file.name)
+            formData.append('id', data.id)
+            await uploadPhoto(formData)
             toggleModal(false)
             setValues({
                 name: '',
@@ -69,7 +73,7 @@ function App() {
             <dialog ref={modalRef} className='modal'>
                 <div className='modal__header'>
                     <h1>New Contact</h1>
-                    <i onClick={()=>toggleModal(false)} className="bi bi-x-circle-fill"></i>
+                    <i onClick={() => toggleModal(false)} className="bi bi-x-circle-fill"></i>
                 </div>
                 <hr/>
                 <form onSubmit={handleNewContact}>
@@ -97,6 +101,10 @@ function App() {
                         <div className='input-box'>
                             <span className='details'><i className="bi bi-geo-alt"></i> address</span>
                             <input type="text" name='address' value={values.address} onChange={onChange} required/>
+                        </div>
+                        <div className='input-box'>
+                            <span className='details'><i className="bi bi-cloud-arrow-up"></i> Profile photo</span>
+                            <input type="file" name='photo' onChange={(e) => setFile(e.target.files[0])} required/>
                         </div>
                     </div>
 
