@@ -31,3 +31,6 @@ Content-Type: image/jpeg
 
 < /home/user/Downloads/Photos/happy-1836445_640.jpg
 --boundary--
+
+### GET photo
+GET http://localhost:8080/contacts/photo/w45serfsdtre5teg.jpg

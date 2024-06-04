@@ -7,6 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.projects.springbootwithreact.model.Contact;
 import pl.projects.springbootwithreact.service.ContactService;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 @RequestMapping("/contacts")
 @RestController
 public class ContactController {
@@ -33,6 +37,10 @@ public class ContactController {
     @PutMapping("/photo")
     public ResponseEntity<String> uploadPhoto(@RequestParam String id, @RequestParam MultipartFile photo) {
         return ResponseEntity.ok(contactService.uploadPhoto(id, photo));
+    }
+    @GetMapping("/photo/{filename}")
+    public byte[] getPhoto(@PathVariable String filename) throws IOException {
+        return Files.readAllBytes(Paths.get(ContactService.PATH_DIRECTORY + filename));
     }
 
 }
