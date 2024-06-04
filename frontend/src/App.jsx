@@ -3,6 +3,7 @@ import {getContacts, saveContact, uploadPhoto} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 function App() {
     const [data, setData] = useState([])
@@ -66,7 +67,10 @@ function App() {
             <main className='main'>
                 <div className='container'>
                     <Header toggleModal={toggleModal} numberOfContacts={data.totalElements}/>
-                    <ContactList data={data}/>
+                    <Routes>
+                        <Route path="/" element={<Navigate to={"/contacts"}/>}/>
+                        <Route path="/contacts" element={<ContactList data={data}/>}/>
+                    </Routes>
                 </div>
 
             </main>
