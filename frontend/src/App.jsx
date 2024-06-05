@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
 import {Navigate, Route, Routes} from "react-router-dom";
+import ContactDetails from "./components/ContactDetails";
 
 function App() {
     const [data, setData] = useState([])
@@ -70,6 +71,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Navigate to={"/contacts"}/>}/>
                         <Route path="/contacts" element={<ContactList data={data}/>}/>
+                        <Route path="/contacts/:id" element={<ContactDetails/>} />
                     </Routes>
                 </div>
 

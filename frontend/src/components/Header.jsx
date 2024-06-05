@@ -4,7 +4,7 @@ const Header = ({numberOfContacts, toggleModal}) => {
 
 
     return(
-        <div>
+        <div className="header">
             <div>number of contacts: {numberOfContacts} </div>
             <button onClick={() =>toggleModal(true)}>Add new Contact</button>
         </div>

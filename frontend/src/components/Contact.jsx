@@ -1,5 +1,6 @@
 import React from "react";
 import {getContact} from "../api/ContactService";
+import {Link} from "react-router-dom";
 
 const Contact = ({contact}) => {
 //test
@@ -8,7 +9,7 @@ const Contact = ({contact}) => {
         console.log(data)
     }
     return (
-        <a className='contact__item'>
+        <Link to={`/contacts/${contact.id}`} className='contact__item'>
             <header className='contact__header'>
                 <div className="contact__image">
                     <img src={contact.photoUrl} alt={contact.name}/>
@@ -25,7 +26,7 @@ const Contact = ({contact}) => {
                 <p>{contact.status}</p>
             </div>
             <button onClick={handleOnClick}>click</button>
-        </a>
+        </Link>
     )
 }
 export default Contact
