@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useParams} from "react-router-dom";
 import {getContact} from "../api/ContactService";
 
-const ContactDetails = () => {
-
+const ContactDetails = ({updateImage}) => {
+    const inputRef = useRef()
     const [contact, setContact] = useState(
         {
             name: '',
@@ -28,13 +28,34 @@ const ContactDetails = () => {
             console.error("Failed to fetch contact", error)
         }
     }
+
+    const selectImage = () => {
+        inputRef.current.click();
+    }
+
+    const updatePhoto = async (file) => {
+        try {
+            const formData = new FormData();
+            formData.append("photo", file, file.name)
+            formData.append("id", id)
+            await updateImage(formData);
+            // await getSingleContact(id) //to fix : The image URL doesn't change because the file is overwritten with the same name, no rerender occurs
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getSingleContact(id)
     }, [])
 
 
-    const onChange = () => {
-
+    const onChange = (e) => {
+        const {name, value} = e.target;
+        setContact(prevContact => ({
+            ...prevContact,
+            [name]: value
+        }))
     }
     return (
         <>
@@ -44,7 +65,7 @@ const ContactDetails = () => {
                     <img src={contact.photoUrl} alt={contact.name}/>
                     <div>
                         <p className="profile__name">{contact.name}</p>
-                        <button><i className="bi bi-cloud-arrow-up"></i> Change Photo</button>
+                        <button onClick={selectImage}><i className="bi bi-cloud-arrow-up"></i> Change Photo</button>
                     </div>
                 </div>
                 <div className="profile__settings">
@@ -78,10 +99,14 @@ const ContactDetails = () => {
                             </div>
                         </div>
 
-                        <button type='submit'>save</button>
+                        <button type='submit'><i className="bi bi-floppy"></i> save</button>
                     </form>
                 </div>
             </div>
+            <form style={{display: 'none'}}>
+                <input type="file" ref={inputRef} onChange={(e) => updatePhoto(e.target.files[0])} name="photo"
+                       accept="image/*"/>
+            </form>
         </>
     )
 }
