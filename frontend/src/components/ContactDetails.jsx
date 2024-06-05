@@ -15,6 +15,7 @@ const ContactDetails = ({updateImage}) => {
             photoUrl: ""
         }
     )
+    const [queryParam, setQueryParam] = useState('')
     const {id} = useParams();
     // console.log(useParams())
     // console.log(id)
@@ -39,7 +40,7 @@ const ContactDetails = ({updateImage}) => {
             formData.append("photo", file, file.name)
             formData.append("id", id)
             await updateImage(formData);
-            // await getSingleContact(id) //to fix : The image URL doesn't change because the file is overwritten with the same name, no rerender occurs
+            setQueryParam(`?t=${Date.now()}`);
         } catch (error) {
             console.log(error)
         }
@@ -62,7 +63,7 @@ const ContactDetails = ({updateImage}) => {
 
             <div className="profile">
                 <div className='profile__details'>
-                    <img src={contact.photoUrl} alt={contact.name}/>
+                    <img src={`${contact.photoUrl}${queryParam}`} alt={contact.name}/>
                     <div>
                         <p className="profile__name">{contact.name}</p>
                         <button onClick={selectImage}><i className="bi bi-cloud-arrow-up"></i> Change Photo</button>
