@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react'
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {getContact} from "../api/ContactService";
 
-const ContactDetails = ({updateImage}) => {
+const ContactDetails = ({updateImage, updateContact}) => {
     const inputRef = useRef()
     const [contact, setContact] = useState(
         {
@@ -17,8 +17,6 @@ const ContactDetails = ({updateImage}) => {
     )
     const [queryParam, setQueryParam] = useState('')
     const {id} = useParams();
-    // console.log(useParams())
-    // console.log(id)
 
     const getSingleContact = async (id) => {
         try {
@@ -58,19 +56,28 @@ const ContactDetails = ({updateImage}) => {
             [name]: value
         }))
     }
+
+    const onFormSubmit = async (e) =>{
+        e.preventDefault()
+       await updateContact(contact)
+        getSingleContact(id)
+    }
+
     return (
         <>
-
+            <Link to={"/contacts"}>
+                <button className="btn-danger"><i className="bi bi-arrow-left-circle"></i> back to contacts</button>
+            </Link>
             <div className="profile">
                 <div className='profile__details'>
-                    <img src={`${contact.photoUrl}${queryParam}`} alt={contact.name}/>
+                <img src={`${contact.photoUrl}${queryParam}`} alt={contact.name}/>
                     <div>
                         <p className="profile__name">{contact.name}</p>
                         <button onClick={selectImage}><i className="bi bi-cloud-arrow-up"></i> Change Photo</button>
                     </div>
                 </div>
                 <div className="profile__settings">
-                    <form>
+                    <form onSubmit={onFormSubmit}>
                         <div className='contact_details'>
                             <input type="hidden" defaultValue={contact.id} name="id"/>
                             <div className='input-box'>

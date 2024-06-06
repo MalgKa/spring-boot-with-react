@@ -70,6 +70,9 @@ function App() {
         }
     }
 
+    const updateContact = async(contact)=>{
+        await saveContact(contact);
+    }
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
 
     return (
@@ -80,7 +83,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Navigate to={"/contacts"}/>}/>
                         <Route path="/contacts" element={<ContactList data={data}/>}/>
-                        <Route path="/contacts/:id" element={<ContactDetails updateImage={updateImage}/>}/>
+                        <Route path="/contacts/:id" element={<ContactDetails updateImage={updateImage} updateContact={updateContact}/>}/>
                     </Routes>
                 </div>
 

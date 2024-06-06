@@ -209,3 +209,19 @@ button:hover {
     transform: translateY(2px);
     background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #1d33d9 100%);
 }
+
+.btn-danger{
+    background-image: radial-gradient(100% 100% at 100% 0, #ffe6ed 0, #ab2222 100%);
+    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    padding: 5px 10px;
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    transition: transform .2s;
+}
+.btn-danger:hover {
+    box-shadow: none;
+    transform: translateY(2px);
+    background-image: radial-gradient(100% 100% at 100% 0, #f1b2c4 0, #750808 100%);
+}
