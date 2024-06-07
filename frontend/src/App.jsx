@@ -19,9 +19,11 @@ function App() {
             address: ''
         }
     )
+    const [currentPage, setCurrentPage] = useState({})
     const modalRef = useRef();
-    const getAllContacts = async (page = 0, size = 10) => {
+    const getAllContacts = async (page = 0, size = 8) => {
         try {
+            setCurrentPage(page)
             const {data} = await getContacts(page, size);
             setData(data)
         } catch (error) {
@@ -72,6 +74,7 @@ function App() {
 
     const updateContact = async(contact)=>{
         await saveContact(contact);
+        getAllContacts()
     }
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
 
@@ -82,7 +85,7 @@ function App() {
                     <Header toggleModal={toggleModal} numberOfContacts={data.totalElements}/>
                     <Routes>
                         <Route path="/" element={<Navigate to={"/contacts"}/>}/>
-                        <Route path="/contacts" element={<ContactList data={data}/>}/>
+                        <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts}/>}/>
                         <Route path="/contacts/:id" element={<ContactDetails updateImage={updateImage} updateContact={updateContact}/>}/>
                     </Routes>
                 </div>
