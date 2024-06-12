@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static pl.projects.springbootwithreact.constant.Constant.PATH_DIRECTORY;
+
 @RequestMapping("/contacts")
 @RestController
 public class ContactController {
@@ -40,7 +42,7 @@ public class ContactController {
     }
     @GetMapping("/photo/{filename}")
     public byte[] getPhoto(@PathVariable String filename) throws IOException {
-        return Files.readAllBytes(Paths.get(ContactService.PATH_DIRECTORY + filename));
+        return Files.readAllBytes(Paths.get(PATH_DIRECTORY + filename));
     }
 
 }

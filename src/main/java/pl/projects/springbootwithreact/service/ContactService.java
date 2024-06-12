@@ -19,10 +19,10 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static pl.projects.springbootwithreact.constant.Constant.PATH_DIRECTORY;
+
 @Service
 public class ContactService {
-
-    public static final String PATH_DIRECTORY = System.getProperty("user.home") + "/Downloads/uploads/";
 
     private final ContactRepository contactRepository;
 
@@ -51,13 +51,12 @@ public class ContactService {
         return photoUrl;
     }
 
-
-    public static Function<String, String> extractFileExtension = (filename) ->
+    private final Function<String, String> extractFileExtension = (filename) ->
             Optional.of(filename).filter(name -> name.contains("."))
                     .map(name -> name.substring(name.lastIndexOf(".")))
                     .orElse(".jpg");
 
-    public static BiFunction<String, MultipartFile, String> savePhoto = (id, photo) -> {
+    private final BiFunction<String, MultipartFile, String> savePhoto = (id, photo) -> {
         String filename = id + extractFileExtension.apply(photo.getOriginalFilename());
         try {
             Path pathFile = Paths.get(PATH_DIRECTORY).toAbsolutePath().normalize();

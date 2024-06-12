@@ -9,11 +9,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import static org.springframework.http.HttpHeaders.*;
 import static org.springframework.http.HttpMethod.*;
+import static pl.projects.springbootwithreact.constant.Constant.X_REQUESTED_WITH;
 
 
 @Configuration
 public class CorsConfig {
-    public static final String X_REQUESTED_WITH = "X-Requested-With"; //X-Requested-With is a header that can be set by browsers to indicate that the request originates from AJAX(The typical value for this header is 'XMLHttpRequest')
     @Bean
     public CorsFilter corsFilter(){ //returns an instance of CorsFilter
         var urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource(); //It creates an instance of UrlBasedCorsConfigurationSource, which allows configuring corsConfiguration for different URL paths
