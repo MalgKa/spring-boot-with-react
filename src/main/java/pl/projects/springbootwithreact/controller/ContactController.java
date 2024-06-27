@@ -21,18 +21,21 @@ public class ContactController {
     public ContactController(ContactService contactService) {
         this.contactService = contactService;
     }
+
     @GetMapping
-    public ResponseEntity<Page<Contact>> getContacts(@RequestParam int page, int size){
+    public ResponseEntity<Page<Contact>> getContacts(@RequestParam int page, int size) {
         Page<Contact> allContacts = contactService.getAllContacts(page, size);
         return ResponseEntity.ok(allContacts);
     }
+
     @PostMapping
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact){
+    public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
         Contact createdContact = contactService.createContact(contact);
         return ResponseEntity.ok(createdContact);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContact(@PathVariable String id){
+    public ResponseEntity<Contact> getContact(@PathVariable String id) {
         return ResponseEntity.ok(contactService.getContact(id));
     }
 
@@ -40,9 +43,15 @@ public class ContactController {
     public ResponseEntity<String> uploadPhoto(@RequestParam String id, @RequestParam MultipartFile photo) {
         return ResponseEntity.ok(contactService.uploadPhoto(id, photo));
     }
+
     @GetMapping("/photo/{filename}")
     public byte[] getPhoto(@PathVariable String filename) throws IOException {
         return Files.readAllBytes(Paths.get(PATH_DIRECTORY + filename));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteContact(@PathVariable String id) {
+        contactService.deleteContact(id);
+        return ResponseEntity.noContent().build();
+    }
 }

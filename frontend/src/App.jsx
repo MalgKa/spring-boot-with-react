@@ -1,5 +1,5 @@
 import './App.css';
-import {getContacts, saveContact, uploadPhoto} from "./api/ContactService";
+import {deleteContact, getContacts, saveContact, uploadPhoto} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
@@ -76,6 +76,15 @@ function App() {
         await saveContact(contact);
         getAllContacts()
     }
+
+    const removeContact = async(id) =>{
+        try{
+            await deleteContact(id)
+            getAllContacts()
+        } catch (error){
+            console.log(error)
+        }
+    }
     const toggleModal = (show) => show ? modalRef.current.showModal() : modalRef.current.close()
 
     return (
@@ -85,7 +94,7 @@ function App() {
                     <Header toggleModal={toggleModal} numberOfContacts={data.totalElements}/>
                     <Routes>
                         <Route path="/" element={<Navigate to={"/contacts"}/>}/>
-                        <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts}/>}/>
+                        <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts} removeContact={removeContact}/>}/>
                         <Route path="/contacts/:id" element={<ContactDetails updateImage={updateImage} updateContact={updateContact}/>}/>
                     </Routes>
                 </div>

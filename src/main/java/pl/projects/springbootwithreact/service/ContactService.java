@@ -43,6 +43,11 @@ public class ContactService {
         return contactRepository.save(contact);
     }
 
+    public void deleteContact(String id) {
+        Contact contact = getContact(id);
+        contactRepository.delete(contact);
+    }
+
     public String uploadPhoto(String id, MultipartFile photo) {
         Contact contact = getContact(id);
         String photoUrl = savePhoto.apply(id,photo);

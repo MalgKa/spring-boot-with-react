@@ -15,3 +15,6 @@ export async function getContact(id){
 export async function uploadPhoto(formData) {
     return await axios.put(`${API_URL}/photo`, formData)
 }
+export async function deleteContact(id){
+    return await axios.delete(`${API_URL}/${id}`)
+}

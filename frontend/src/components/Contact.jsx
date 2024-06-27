@@ -1,7 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const Contact = ({contact}) => {
+const Contact = ({contact, removeContact}) => {
+
+
     return (
         <Link to={`/contacts/${contact.id}`} className='contact__item'>
             <header className='contact__header'>
@@ -20,6 +22,11 @@ const Contact = ({contact}) => {
                 <p>{contact.status === "active" ? <i className="bi bi-check-circle-fill"></i> :
                     <i className="bi bi-x-circle-fill"></i>} {contact.status}</p>
             </div>
+            <button className="btn-danger btn-delete" onClick={(e) => {
+                removeContact(contact.id);
+                e.preventDefault()
+            }}>delete
+            </button>
         </Link>
     )
 }
