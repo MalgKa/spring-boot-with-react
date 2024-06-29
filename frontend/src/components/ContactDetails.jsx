@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import {Link, useParams} from "react-router-dom";
 import {getContact} from "../api/ContactService";
+import {motion} from "framer-motion";
 
 const ContactDetails = ({updateImage, updateContact}) => {
     const inputRef = useRef()
@@ -65,6 +66,7 @@ const ContactDetails = ({updateImage, updateContact}) => {
 
     return (
         <>
+            <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.2}}>
             <Link to={"/contacts"}>
                 <button className="btn-danger"><i className="bi bi-arrow-left-circle"></i> back to contacts</button>
             </Link>
@@ -115,6 +117,7 @@ const ContactDetails = ({updateImage, updateContact}) => {
                 <input type="file" ref={inputRef} onChange={(e) => updatePhoto(e.target.files[0])} name="photo"
                        accept="image/*"/>
             </form>
+            </motion.div>
         </>
     )
 }

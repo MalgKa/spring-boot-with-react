@@ -1,10 +1,11 @@
 import React from "react";
 import Contact from "./Contact";
+import {motion} from "framer-motion";
 
 const ContactList = ({data, currentPage, getAllContacts, removeContact}) => {
 
     return (
-        <main className='main'>
+        <motion.main initial={{opacity:0}} animate={{opacity:1}} transition={{duration:1.2}} className='main'>
             <ul className='contact__list'>
                 {data.content && data.content.map(contact => (<Contact contact={contact} key={contact.id} removeContact={removeContact}/>
                 ))}
@@ -22,7 +23,7 @@ const ContactList = ({data, currentPage, getAllContacts, removeContact}) => {
                         className={`btn-danger ${currentPage === data.totalPages - 1 ? "disabled" : ""}`}><i
                     className="bi bi-skip-forward-fill"></i></button>
             </div>
-        </main>
+        </motion.main>
     )
 }
 export default ContactList
