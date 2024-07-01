@@ -1,6 +1,7 @@
 
 :root {
     --ff-comic: 'Comic Neue';
+    --button-box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
 }
 
 /* RESET */
@@ -21,10 +22,10 @@ body {
     background-color: #dfefef;
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/*code {*/
+/*    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',*/
+/*    monospace;*/
+/*}*/
 
 .main {
     margin-top: 1.3rem;
@@ -98,7 +99,7 @@ code {
     margin-bottom: 0.5rem;
 }
 
-.modal{
+.modal {
     position: fixed;
     top: 40%;
     left: 50%;
@@ -124,11 +125,11 @@ code {
 @keyframes appear {
     from {
         opacity: 0;
-        transform: translate(-50%,-50vh)
+        transform: translate(-50%, -50vh)
     }
     to {
         opacity: 1;
-        transform: translate(-50%,-50%)
+        transform: translate(-50%, -50%)
     }
 }
 
@@ -136,12 +137,12 @@ code {
     from {
         display: block;
         opacity: 1;
-        transform: translate(-50%,-50%)
+        transform: translate(-50%, -50%)
     }
     to {
         display: none;
         opacity: 0;
-        transform: translate(-50%,-50vh)
+        transform: translate(-50%, -50vh)
     }
 }
 
@@ -237,7 +238,7 @@ a {
 
 button {
     background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #4455d5 100%);
-    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-shadow: var(--button-box-shadow);
     padding: 8px 10px;
     color: #fff;
     font-weight: 700;
@@ -254,7 +255,7 @@ button:hover {
 
 .btn-danger {
     background-image: radial-gradient(100% 100% at 100% 0, #ffe6ed 0, #ab2222 100%);
-    box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+    box-shadow: var(--button-box-shadow);
     padding: 8px 10px;
     color: #fff;
     font-weight: 700;
@@ -292,7 +293,31 @@ button:hover {
 
 .btn-delete {
     position: absolute;
-
-  bottom: 0.2rem;
+    bottom: 0.2rem;
     right: 0.2rem;
+}
+
+select {
+    background: #4a5df1;
+    box-shadow: var(--button-box-shadow);
+    color: white;
+    padding: 8px 26px 8px 5px;
+    font-size: 1.02rem;
+    font-family: var(--ff-comic), serif;
+    font-weight: 700;
+    outline: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+select:hover {
+    background: #2c40e5;
+    box-shadow: none;
+}
+
+option {
+    font-weight: 700;
+}
+option:nth-child(even) {
+    background-color: #4a5df1;
 }
