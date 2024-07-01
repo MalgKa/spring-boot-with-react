@@ -18,3 +18,6 @@ export async function uploadPhoto(formData) {
 export async function deleteContact(id){
     return await axios.delete(`${API_URL}/${id}`)
 }
+export async function getByPosition(position, page,size){
+    return await axios.get(`${API_URL}/position?position=${position}&page=${page}&size=${size}`)
+}
