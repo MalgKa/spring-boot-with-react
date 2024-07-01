@@ -54,4 +54,11 @@ public class ContactController {
         contactService.deleteContact(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/position")
+    public ResponseEntity<Page<Contact>> getContactByPosition(@RequestParam int page, @RequestParam int size, @RequestParam String position ) {
+        Page<Contact> contactsByPosition = contactService.getContactsByPosition(page, size, position);
+        System.out.println(position);
+        return ResponseEntity.ok().body(contactsByPosition);
+    }
 }

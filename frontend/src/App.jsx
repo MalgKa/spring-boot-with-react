@@ -1,5 +1,5 @@
 import './App.css';
-import {deleteContact, getContacts, saveContact, uploadPhoto} from "./api/ContactService";
+import {deleteContact, getByPosition, getContacts, saveContact, uploadPhoto} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
@@ -9,6 +9,7 @@ import ContactDetails from "./components/ContactDetails";
 function App() {
     const [data, setData] = useState([])
     const [file, setFile] = useState(undefined)
+    const [positions, setPositions] = useState([])
     const [values, setValues] = useState(
         {
             name: '',
@@ -26,10 +27,27 @@ function App() {
             setCurrentPage(page)
             const {data} = await getContacts(page, size);
             setData(data)
+            updatePositions(data.content)
+            console.log(data.content)
         } catch (error) {
             console.error("Failed to fetch contacts", error)
         }
     }
+
+    const updatePositions = (contacts) =>{
+        const newPositions = contacts.map(contact=>contact.position);
+        setPositions(prevPositions => [...new Set([...prevPositions, ...newPositions])]) // new Set: to get rid of duplicates
+    }
+    const getContactsByPosition = async (position, page = 0, size = 8) => {
+        try {
+            setCurrentPage(page)
+            const {data} = await getByPosition(position, page, size);
+            setData(data)
+        } catch (error) {
+            console.error("Failed to fetch contacts", error)
+        }
+    }
+
     useEffect(() => {
         getAllContacts()
     }, []);
@@ -72,16 +90,16 @@ function App() {
         }
     }
 
-    const updateContact = async(contact)=>{
+    const updateContact = async (contact) => {
         await saveContact(contact);
         getAllContacts()
     }
 
-    const removeContact = async(id) =>{
-        try{
+    const removeContact = async (id) => {
+        try {
             await deleteContact(id)
             getAllContacts()
-        } catch (error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -91,7 +109,7 @@ function App() {
         <>
             <main className='main'>
                 <div className='container'>
-                    <Header toggleModal={toggleModal} numberOfContacts={data.totalElements}/>
+                    <Header toggleModal={toggleModal} numberOfContacts={data.totalElements} positions={positions} getContactsByPosition={getContactsByPosition} getAllContacts={getAllContacts}/>
                     <Routes>
                         <Route path="/" element={<Navigate to={"/contacts"}/>}/>
                         <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts} removeContact={removeContact}/>}/>

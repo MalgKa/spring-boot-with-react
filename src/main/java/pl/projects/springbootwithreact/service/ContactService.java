@@ -48,6 +48,11 @@ public class ContactService {
         contactRepository.delete(contact);
     }
 
+    public Page<Contact> getContactsByPosition(int page,int size, String position){
+        Pageable pageable = PageRequest.of(page, size,Sort.by("name"));
+        return contactRepository.findAllByPosition(pageable, position);
+    }
+
     public String uploadPhoto(String id, MultipartFile photo) {
         Contact contact = getContact(id);
         String photoUrl = savePhoto.apply(id,photo);
