@@ -1,5 +1,6 @@
 package pl.projects.springbootwithreact.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -22,8 +24,8 @@ import java.util.function.Function;
 import static pl.projects.springbootwithreact.constant.Constant.PATH_DIRECTORY;
 
 @Service
+@Slf4j
 public class ContactService {
-
     private final ContactRepository contactRepository;
 
     public ContactService(ContactRepository contactRepository) {
@@ -51,6 +53,11 @@ public class ContactService {
     public Page<Contact> getContactsByPosition(int page,int size, String position){
         Pageable pageable = PageRequest.of(page, size,Sort.by("name"));
         return contactRepository.findAllByPosition(pageable, position);
+    }
+
+    public List<String> getAllPositions(){
+        log.info("getAllPositions: {}", contactRepository.findAllDistinctPositions());
+        return contactRepository.findAllDistinctPositions();
     }
 
     public String uploadPhoto(String id, MultipartFile photo) {

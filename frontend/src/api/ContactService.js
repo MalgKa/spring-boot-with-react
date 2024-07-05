@@ -21,3 +21,7 @@ export async function deleteContact(id){
 export async function getByPosition(position, page,size){
     return await axios.get(`${API_URL}/position?position=${position}&page=${page}&size=${size}`)
 }
+
+export async function getPositions(){
+    return await axios.get(`${API_URL}/positions`);
+}
