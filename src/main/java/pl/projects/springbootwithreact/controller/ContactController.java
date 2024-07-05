@@ -10,6 +10,7 @@ import pl.projects.springbootwithreact.service.ContactService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 import static pl.projects.springbootwithreact.constant.Constant.PATH_DIRECTORY;
 
@@ -58,7 +59,11 @@ public class ContactController {
     @GetMapping("/position")
     public ResponseEntity<Page<Contact>> getContactByPosition(@RequestParam int page, @RequestParam int size, @RequestParam String position ) {
         Page<Contact> contactsByPosition = contactService.getContactsByPosition(page, size, position);
-        System.out.println(position);
         return ResponseEntity.ok().body(contactsByPosition);
+    }
+
+    @GetMapping("/positions")
+    public ResponseEntity<List<String>> getAllPositions() {
+        return ResponseEntity.ok().body(contactService.getAllPositions());
     }
 }

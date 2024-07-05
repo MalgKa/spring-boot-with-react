@@ -1,5 +1,5 @@
 import './App.css';
-import {deleteContact, getByPosition, getContacts, saveContact, uploadPhoto} from "./api/ContactService";
+import {deleteContact, getPositions, getByPosition, getContacts, saveContact, uploadPhoto} from "./api/ContactService";
 import {useEffect, useRef, useState} from "react";
 import ContactList from "./components/ContactList";
 import Header from "./components/Header";
@@ -27,16 +27,18 @@ function App() {
             setCurrentPage(page)
             const {data} = await getContacts(page, size);
             setData(data)
-            updatePositions(data.content)
-            console.log(data.content)
         } catch (error) {
             console.error("Failed to fetch contacts", error)
         }
     }
 
-    const updatePositions = (contacts) =>{
-        const newPositions = contacts.map(contact=>contact.position);
-        setPositions(prevPositions => [...new Set([...prevPositions, ...newPositions])]) // new Set: to get rid of duplicates
+    const updatePositions = async () =>{
+        try{
+            const {data} = await getPositions();
+            setPositions(data);
+        }catch(error){
+            console.error("Failed to fetch positions", error)
+        }
     }
     const getContactsByPosition = async (position, page = 0, size = 8) => {
         try {
@@ -49,6 +51,7 @@ function App() {
     }
 
     useEffect(() => {
+        updatePositions()
         getAllContacts()
     }, []);
 
